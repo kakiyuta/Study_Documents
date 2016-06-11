@@ -1,0 +1,92 @@
+## swift文法
+
+### 変数宣言
+---
+~~~
+var number = 0;        // 変数宣言
+var number: Int = 0;   // 型を明記した場合
+~~~
+
+### 定数宣言
+---
+~~~
+let number = 0    // 定数宣言
+let number: Int = 0;   // 型を明記した場合
+~~~
+
+### 型の種類
+---
+| 型 | 型の説明 |
+| :-----: | -------|
+| Int | 整数型 |
+| Double | 浮動小数点数型(64bit長) |
+| Float | 浮動小数点数型(32bit長) |
+| Bool | 論理型 (true or false) |
+| String | 文字列型 |
+＊ 型の頭文字は大文字
+
+### 型変換
+---
+swiftは**暗黙的な型変換は行いません**。
+異なる型に変換したい場合は変換先の型を明記する必要があります。
+
+~~~
+let label = "The width is "
+let width = 94
+let width_label = label + String(width)   // "The width is 94"
+~~~
+
+Stringに変数の値を含めたい場合は下記の方法もある。
+
+~~~
+let apples = 3
+let apple_summary = "I have \(apples) apples."
+// "I have 3 apples."　
+~~~
+
+### 配列
+---
+
+### 条件分岐
+---
+
+### null
+---
+swiftでは**null**ではなく**nil**を使う
+
+### オプショナルな変数(Option Value)
+---
+swiftでは変数宣言時に値を代入していなくてもコンパイルエラーになりません。
+
+しかし、
+~~~
+var required: String
+println(required)     // コンパイルエラー
+~~~
+変数に値を入れる前に参照しようとするとコンパイルエラーになる。
+
+このように通常の変数には中身が入っている（nilでない）ことをコンパーラーが保証してくれています。
+よって、従来の言語のように参照する前にnullチェックなどをする必要がなくなりました。
+
+通常の変数では上記の理由で**nil**を代入することはできません。
+nilを代入したい場合は **オプショナルな変数(Optional value)** にする必要があります。
+オプショナルな変数には型の後に **?** を記述します。
+~~~
+var required: String = "必須"
+var optional: String? = "オプチョナル"
+
+required = nil    // コンパイルエラー
+optional = nil    // こっちは大丈夫
+~~~
+
+通常の変数にオプショナルな変数を代入しようとするとエラーになります。
+これを回避するためにはオプショナル変数の後ろに **!** をつける必要があります。
+~~~
+var required: String = "必須"
+var optional: String? = "オプチョナル"
+
+required = optional     // コンパイルエラー
+required = optional!    // 後ろに!があるとコンパイルエラーにならない
+                        // ただし、実行時にエラーとなる
+~~~
+!をつけてしまうとコンパイラーの恩恵を受けられないので、あまり使ってはいけないケースだと思われる。
