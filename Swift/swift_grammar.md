@@ -50,12 +50,37 @@ let apple_summary = "I have \(apples) apples."
 ### 条件分岐
 ---
 
+### 繰り返し文
+
+### switch文
+---
+switch文の分岐条件は整数型以外でも使用可能。
+~~~
+let vegetable = "red pepper"
+switch vegetable {
+case "celery":
+    print("Add some raisins and make ants on a log.")
+case "cucumber", "watercress":
+    print("That would make a good tea sandwich.")
+case let x where x.hasSuffix("pepper"):   // 語尾が"pepper"であるのでここに分岐する。
+    print("Is it a spicy \(x)?")
+default:
+    print("Everything tastes good in soup.")
+}
+~~~
+
+swiftのswitch文ではdefaultを記述しなくてはならない。記述しなかった場合はコンパイルエラーとなる。
+
+また条件に分岐した後、次項のcaseには分岐しないため、case毎にbreak文を書く必要がありません。
+
 ### null
 ---
+
 swiftでは**null**ではなく**nil**を使う
 
 ### オプショナルな変数(Option Value)
 ---
+
 swiftでは変数宣言時に値を代入していなくてもコンパイルエラーになりません。
 
 しかし、
@@ -83,10 +108,21 @@ optional = nil    // こっちは大丈夫
 これを回避するためにはオプショナル変数の後ろに **!** をつける必要があります。
 ~~~
 var required: String = "必須"
-var optional: String? = "オプチョナル"
+var optional: String? = nil
 
 required = optional     // コンパイルエラー
 required = optional!    // 後ろに!があるとコンパイルエラーにならない
                         // ただし、実行時にエラーとなる
 ~~~
 !をつけてしまうとコンパイラーの恩恵を受けられないので、あまり使ってはいけないケースだと思われる。
+
+他の回避方法として、参照予定のオプショナルな変数がnilだった場合はデフォルトの値を使うように指定する **??** 演算子を使用することができる。
+
+~~~
+let nick_name: String? = nil;
+let full_name = "John Appleseed";
+
+let informal_greeting = "Hi \(nick_name ?? full_name).";   // Hi John Appleseed
+// nick_nameがnilのためfull_nameが参照される
+
+~~~
