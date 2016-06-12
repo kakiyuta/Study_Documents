@@ -51,6 +51,36 @@ let apple_summary = "I have \(apples) apples."
 ---
 
 ### 繰り返し文
+---
+
+#### for
+例を下記に示す
+~~~
+var total = 0
+for i in 0..<4 {    // 4回(0〜3)繰り返す
+    total += i
+}
+~~~
+C言語のような条件式を記述することもできますがswift3で使えなくなるため、 **for in**を使うことを推奨する。
+
+#### while
+例を下記に示す。
+~~~
+var n = 1
+while n < 100 {
+    n = n * 2
+}
+~~~
+
+#### repeat-while (do-while)
+後判定ループ（C言語ではdo-while）をswiftで使う場合はrepeat-whileを使用する。
+例を下記に示す。
+~~~
+var m = 2
+repeat {
+    m = m * 2
+} while m < 100
+~~~
 
 ### switch文
 ---
@@ -126,3 +156,15 @@ let informal_greeting = "Hi \(nick_name ?? full_name).";   // Hi John Appleseed
 // nick_nameがnilのためfull_nameが参照される
 
 ~~~
+
+
+### 関数
+swiftで関数を作成すると下記のようになる。
+~~~
+func greet(name: String, day: String) -> String {
+    return "Hello \(name), today is \(day)."
+}
+
+print(greet("Bob", day: "Tuesday"))     // Hello Bob, today is Tuesday
+~~~
+関数の戻り値の型は **->** で指定する。
