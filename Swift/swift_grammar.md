@@ -25,6 +25,75 @@ let number: Int = 0;   // 型を明記した場合
 | String | 文字列型 |
 ＊ 型の頭文字は大文字
 
+### 算術
+---
+注意点：
+swift3からインクリメントとデクリメントの文法は除去されます。
+~~~
+var a = 1
+a++         // swift2ではwarnningが表示される
+a           // swift2ではwarnningが表示される
+~~~
+よって、swiftでインクリメントしたい場合は下記の文法に置き換える必要がある。
+~~~
+var a = 1
+a += 1
+a -= 1
+~~~
+
+### 範囲演算子
+---
+範囲演算子とはその名の通り値の範囲を示すoperatorです。
+範囲演算子は二つあります。
+* Closed range operator
+      * a...b   (a <= X <= b)
+* Half-open range operator
+      * a..<b   (a <= X < b)
+
+具体的な使用例を下記のコードに示す。
+~~~
+// Closed range operatorの使用例
+for index in 0...5 {
+  print("indexは\(index)です")
+}
+// 結果：
+//indexは0です
+//indexは1です
+//indexは2です
+//indexは3です
+//indexは4です
+//indexは5です
+
+// Half-open range operatorの使用例
+for index in 0..<5 {
+    print("indexは\(index)です")
+}
+// 結果：
+//indexは0です
+//indexは1です
+//indexは2です
+//indexは3です
+//indexは4です
+~~~
+
+範囲を表す数字を変数やマイナス値に置き換えることもできる。
+~~~
+// 変数を使用した場合
+var start = 0
+var end = 5
+for index in start...end
+{
+  print("indexは\(index)です")
+}
+
+// マイナス値
+for index in -6...(-1)    // 後ろの数字がマイナスの場合は()が必要
+{
+    print("\(index)")
+}
+~~~
+
+
 ### 型変換
 ---
 swiftは**暗黙的な型変換は行いません**。
@@ -44,8 +113,26 @@ let apple_summary = "I have \(apples) apples."
 // "I have 3 apples."　
 ~~~
 
-### 配列
+### コレクション型
 ---
+
+#### 配列(Array)
+swiftでの配列(Array)は、 ~~同じ型を持つ値を順番に格納することができます。~~
+
+違う型をいれてもコンパイルエラーにならない・・・。
+
+まず、初期値あり配列の宣言方法を下記に示します。
+~~~
+var array_int1: Array<int> = [10, 7, 11]   // (1)
+var array_int2: [Int] = [10, 7, 11]        // (2)
+var array_int3: Array = [10, 7, 11]        // (3)
+var array_int4 = [10, 7, 11]               // (4)
+~~~
+4つの宣言方法を記述しましたが結果は全て同じです。(1)Array< type >はSwiftの文法的に
+最も正しい書き方だと思われます。(2)の書き方は(1)を省略したものです
+（Apple公式のswiftマニュアルではこの記述方法を使用している）
+(3)は型の指定を省略した形です。右辺の値の型推論から型が確定します。
+(4)はすべてを省略した最も短い宣言方法です。
 
 ### 条件分岐
 ---
