@@ -32,7 +32,7 @@ swift3からインクリメントとデクリメントの文法は除去され�
 ~~~
 var a = 1
 a++         // swift2ではwarnningが表示される
-a           // swift2ではwarnningが表示される
+a--         // swift2ではwarnningが表示される
 ~~~
 よって、swiftでインクリメントしたい場合は下記の文法に置き換える必要がある。
 ~~~
@@ -46,9 +46,9 @@ a -= 1
 範囲演算子とはその名の通り値の範囲を示すoperatorです。
 範囲演算子は二つあります。
 * Closed range operator
-      * a...b   (a <= X <= b)
+      a...b   (a <= X <= b)
 * Half-open range operator
-      * a..<b   (a <= X < b)
+      a..<b   (a <= X < b)
 
 具体的な使用例を下記のコードに示す。
 ~~~
@@ -97,6 +97,7 @@ for index in -6...(-1)    // 後ろの数字がマイナスの場合は()が必�
 ### 型変換
 ---
 swiftは**暗黙的な型変換は行いません**。
+例えばIntとDoubleの変数で演算する場合、型が違うのでコンパイルエラーになります。
 異なる型に変換したい場合は変換先の型を明記する必要があります。
 
 ~~~
@@ -111,6 +112,31 @@ Stringに変数の値を含めたい場合は下記の方法もある。
 let apples = 3
 let apple_summary = "I have \(apples) apples."
 // "I have 3 apples."　
+~~~
+
+### 数値リテラル
+---
+swiftでは例のように数値リテラルを表現することができます。
+~~~
+let decimal_integer = 17
+let binary_integer = 0b10001    // 17の2進数
+let octal_integer = 0o21        // 17の8進数
+let hexadecimal_integer = 0x11  // 17の16進数
+~~~
+
+### 数値の範囲判定
+swiftでは値が型の範囲に収まっているかを判定してくれます。
+~~~
+let cannot_be_negative: UInt8 = -1    // コンパイルエラー
+// UInt8は符号なし整数なので、-1を入れることができない
+
+let too_big: Int8 = Int8.max + 1      // コンパイルエラー
+// Int8の範囲外の数値を代入することはできない
+
+var int_max: Int8 = Int8.max    // 8bit符号付き整数の最大値
+var one = 1
+var sum = int_max + one         // コンパイルエラーにならない
+// この場合はコンパイルエラーにならないが、実行時にエラーとなりプログラムが停止する。
 ~~~
 
 ### コレクション型
@@ -134,8 +160,68 @@ var array_int4 = [10, 7, 11]               // (4)
 (3)は型の指定を省略した形です。右辺の値の型推論から型が確定します。
 (4)はすべてを省略した最も短い宣言方法です。
 
+### タプル
+---
+タプルは複数の値を格納することができます。
+~~~
+let http_404_error = (404, "Not Found")
+~~~
+例ではhttpのエラーコード(Int型)とエラーメッセージ(String型)を格納しているタプル(http_404_error)
+を宣言している。
+
+宣言したタプルの各値を別々の変数または定数に入れることができる。
+~~~
+let (error_code, error_message) = http_404_error
+
+print("Error code is \(error_code)")
+// Error code is 404
+print("Error message is \(error_message)")
+//  Error message is Not Found
+~~~
+
+上記の例で、もしエラーコード(404)だけを取得したい場合は、不要な部分をアンダースコアにすることができる。
+~~~
+let (error_code, _) = http_404_error
+// 404だけをerror_codeに代入
+~~~
+
+タプルのインデックス番号を指定して、各要素を取得してくることもできる。
+~~~
+print("Error code is \(http_404_error.0)")
+// Error code is 404
+print("Error message is \(http_404_error.1)")
+//  Error message is Not Found
+~~~
+
+タプルの宣言時に、各要素に名前をつけることができる。
+各要素を取得したい場合はその名前を指定するだけで取得する。
+~~~
+let http_404_error = (code: 404, message: "Not Found")
+
+print("Error code is \(http_404_error.code)")
+// Error code is 404
+print("Error message is \(http_404_error.message)")
+//  Error message is Not Found
+~~~
+
+タプルを利用することで、関数の戻り値に複数の値をreturnすることができます。
+
 ### 条件分岐
 ---
+if文の分岐条件ではBool(true or false)でなければなりません。
+~~~
+lei i = 1
+if i
+{
+  // iはInt型のためコンパイルエラーになる
+}
+
+let i = 1
+if i == 1
+{
+  // 比較演算子==の演算結果がBool型になるので問題なし
+}
+~~~
 
 ### 繰り返し文
 ---
