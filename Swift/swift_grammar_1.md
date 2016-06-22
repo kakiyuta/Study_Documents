@@ -1,4 +1,4 @@
-## swift文法
+## swift文法1
 
 ### 変数宣言
 ---
@@ -57,7 +57,7 @@ C言語のprintfと同様に  "\n"(改行) や "\t"(タブ) を使用するこ�
 ＊ 型の頭文字は大文字
 
 ### =演算子（代入演算子）
-swiftの=演算子（代入演算子）は **値を返さない(値の更新のみ)** と定義されています。
+swiftの=演算子（代入演算子）は **値を返さない(値の更新のみ)** と定義されている。
 よって、C言語のように
 ~~~
 a = b = C
@@ -308,6 +308,8 @@ if i == 1
 }
 ~~~
 
+また、括弧{}は省略できません。
+
 ### 繰り返し文
 ---
 
@@ -319,7 +321,19 @@ for i in 0..<4 {    // 4回(0〜3)繰り返す
     total += i
 }
 ~~~
+iは自動的に定数となり、繰り返しの内部のみ有効となる。
+よってforの直後にletやvarは書けません
+
 C言語のような条件式を記述することもできますがswift3で使えなくなるため、 **for in**を使うことを推奨する。
+
+for-in文にはオプションでwhere節節を記述し、その条件に当てはまった時だけコードブロックが実行される。
+~~~
+for i in 1..<64 where i % 3 != 0 && i % 8 != 0
+{
+    // i が3の倍数でない かつ 8の倍数でない時に出力される
+    print(i)
+}
+~~~
 
 #### while
 例を下記に示す。
@@ -340,6 +354,50 @@ repeat {
 } while m < 100
 ~~~
 
+### ラベル付きループ文
+---
+ラベル付きループ文とは、多重ループ抜ける手法の一つでgoto文に似ています。（swiftではgoto文はありません）
+
+多重ループを構成するwhile文やfor文などにラベルを付けておき、break文とcontinue文を使用する際に
+どのループを抜けるか、またはどのループの実行を継続するかをラベルで指定する。
+~~~
+let days = 31           // 1ヶ月の日数
+let firstDay = 2        // 1日目の曜日(0:日曜日)
+for i in 0..<firstDay   // 月初めに空白を入れる
+{
+    print("    ", terminator:"") // 改行なし
+}
+
+var d = 1               // 日にちを表す変数
+var week = firstDay     // 曜日のための変数
+
+loop: while true
+{
+    while week < 7
+    {
+        // 一桁数字の場合の表示調整
+        let pad = d < 10 ? " " : ""
+        print(pad + "  \(d)", terminator:"")
+
+        // 月末判定
+        d += 1
+        if d > days
+        {
+            // 改行
+            print("")
+            break loop
+        }
+
+        week += 1
+    }
+    // 改行
+    print("")
+    week = 0
+}
+
+~~~
+
+
 ### switch文
 ---
 switch文の分岐条件は整数型以外でも使用可能。
@@ -348,7 +406,7 @@ let vegetable = "red pepper"
 switch vegetable {
 case "celery":
     print("Add some raisins and make ants on a log.")
-case "cucumber", "watercress":
+case "cucumber", "watercress":            // 複数を列挙することもできる
     print("That would make a good tea sandwich.")
 case let x where x.hasSuffix("pepper"):   // 語尾が"pepper"であるのでここに分岐する。
     print("Is it a spicy \(x)?")
@@ -360,6 +418,24 @@ default:
 swiftのswitch文ではdefaultを記述しなくてはならない。記述しなかった場合はコンパイルエラーとなる。
 
 また条件に分岐した後、次項のcaseには分岐しないため、case毎にbreak文を書く必要がありません。
+ただしcase処理の途中でswitch文から抜けたい場合は **break** を使用することができます。
+
+もしC言語のように下のcase文の処理を次項したい場合は **fallthrough** という文を
+case文の一番下に記述すれば、一個下のcase文も実行される
+~~~
+let number = 0;
+switch number
+{
+case 0:
+    print("0")
+    fallthrough       // 下のcase処理も実行する
+case 1:
+    print("1")
+default:
+    print("default")
+}
+// "0"と"1"が出力される。
+~~~
 
 ### null
 ---
@@ -413,15 +489,3 @@ let informal_greeting = "Hi \(nick_name ?? full_name).";   // Hi John Appleseed
 // nick_nameがnilのためfull_nameが参照される
 
 ~~~
-
-
-### 関数
-swiftで関数を作成すると下記のようになる。
-~~~
-func greet(name: String, day: String) -> String {
-    return "Hello \(name), today is \(day)."
-}
-
-print(greet("Bob", day: "Tuesday"))     // Hello Bob, today is Tuesday
-~~~
-関数の戻り値の型は **->** で指定する。
