@@ -14,6 +14,17 @@ let number = 0    // 定数宣言
 let number: Int = 0;   // 型を明記した場合
 ~~~
 
+### 型の種類
+---
+| 型 | 型の説明 |
+| :-----: | -------|
+| Int | 整数型 |
+| Double | 浮動小数点数型(64bit長) |
+| Float | 浮動小数点数型(32bit長) |
+| Bool | 論理型 (true or false) |
+| String | 文字列型 |
+＊ 型の頭文字は大文字
+
 ### print関数
 ---
 printとはSwiftでの標準出力関数です。
@@ -44,17 +55,23 @@ print(2016, 6, 19, separator:"/", terminator:"です")  // "2016/6/19です"（�
 
 C言語のprintfと同様に  "\n"(改行) や "\t"(タブ) を使用することもできます。
 
+### readLine関数
+Swiftの出力用関数としてはprintが用意されていますが、入力用関数は **readLine関数** 使います。
+readLine()は標準入力からのデータをUTF-8として解釈し、一行文の文字列を読み込んで返します。
+返り値の方はString?でEOFの場合はnilを返します。(Stringの **?** と **nil** についてはオプショナル型で説明します。)
 
-### 型の種類
----
-| 型 | 型の説明 |
-| :-----: | -------|
-| Int | 整数型 |
-| Double | 浮動小数点数型(64bit長) |
-| Float | 浮動小数点数型(32bit長) |
-| Bool | 論理型 (true or false) |
-| String | 文字列型 |
-＊ 型の頭文字は大文字
+readLine()には既定値のある引数stripNewLine:があります。
+この引数は行末の改行文字を入力から取り除くかどうかをBool型の値で指定します。
+既定値ではtrueで、つまり改行文字が取り除かれます。
+~~~
+let strNotEnter: String? = readLine();		// 改行文字は取り除かれる。
+print(strNotEnter!)
+
+let strEnter: String? = readLine(stripNewline: false)	// 改行文字は読み込まれる。
+print(strEnter!)
+print("----------------------------")
+~~~
+print関数の引数についてある **!** はオプショナル型で説明します。
 
 ### =演算子（代入演算子）
 Swiftの=演算子（代入演算子）は **値を返さない(値の更新のみ)** と定義されています。
@@ -207,7 +224,7 @@ var array_int4 = [10, 7, 11]               // (4)
 (3)は型の指定を省略した形です。右辺の値の型推論から型が確定します。
 (4)はすべてを省略した最も短い宣言方法です。
 
-配列の使用例を下記のソースコードないで説明します。
+配列の使用例を下記の例を用いて説明します。
 ~~~
 var str_empty1 = [String]()     // String型の空配列宣言(方法1)
 var str_empty2: [String]        // String型の空配列宣言(方法2)
