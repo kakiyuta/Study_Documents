@@ -21,14 +21,14 @@
 - フレームワーク
 
   - AdonisJs
-
-  - Express
+- Express
     - typescript対応
     - ルータ機能
     - **バリデーション機能はライブラリ使用で可能**
   - Hapi
   - Meteor
   - Sails.js
+    - MVCを思想としたフルスタックフレームワーク
   - Koa
   - LoopBack
   - Derby
