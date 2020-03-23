@@ -60,9 +60,25 @@ EC2で過去発生した特定リージョンの障害にもLambdaには影響�
 
 
 
+## 学習
+
+- [AWS Lambda、Amazon API Gateway、Amazon S3、Amazon DynamoDB、および Amazon Cognito を使用してサーバーレスウェブアプリケーションを構築する方法 | AWS](https://aws.amazon.com/jp/getting-started/projects/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/)
+  - AWS公式サイトが紹介している学習サイト
+- [JAWS-UG 初心者支部#24 でサーバーレスなハンズオン会をやりました #jawsug #jawsug_bgnr - log4ketancho](https://www.ketancho.net/entry/2020/02/20/080000)
+  - 詳細は参考サイトを参照
+
+
+
 ## 参考サイト
 
 - [AWS Lambda とは - AWS Lambda](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/welcome.html)
   - 公式サイト
+- [AWS Lambda、Amazon API Gateway、Amazon S3、Amazon DynamoDB、および Amazon Cognito を使用してサーバーレスウェブアプリケーションを構築する方法 | AWS](https://aws.amazon.com/jp/getting-started/projects/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/)
 - [AWS Lambda - Qiita](https://qiita.com/leomaro7/items/5b56ae9710d236545497#8%E3%83%A2%E3%83%87%E3%83%AB)
+- [JAWS-UG 初心者支部#24 でサーバーレスなハンズオン会をやりました #jawsug #jawsug_bgnr - log4ketancho](https://www.ketancho.net/entry/2020/02/20/080000)
+  - ページ下部のスライドショーが学習の教材になりそう
+    - LambdaのでHello Warld
+    - API Gateway <--> Lambda <--> Amazon Translateによる翻訳サービス実装
+  - https://speakerdeck.com/ketancho/jaws-ug-bgnr-24-serverless-quick-start-hands-on
+    - ↑スライドへの直リンク
 
