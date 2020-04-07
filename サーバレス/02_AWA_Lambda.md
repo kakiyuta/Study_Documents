@@ -66,6 +66,24 @@ EC2で過去発生した特定リージョンの障害にもLambdaには影響�
   - AWS公式サイトが紹介している学習サイト
 - [JAWS-UG 初心者支部#24 でサーバーレスなハンズオン会をやりました #jawsug #jawsug_bgnr - log4ketancho](https://www.ketancho.net/entry/2020/02/20/080000)
   - 詳細は参考サイトを参照
+  - ソース : https://github.com/ketancho/aws-serverless-quick-start-hands-on
+  - 音声データ : https://aws.amazon.com/jp/polly/
+
+
+
+## ~~LambdaとRDBは相性が悪い~~
+
+~~[なぜAWS LambdaとRDBMSの相性が悪いかを簡単に説明する - Sweet Escape](https://www.keisuke69.net/entry/2017/06/21/121501)~~
+
+↑上記サイトにも記載があるが、`Amazon RDS プロキシ`を利用することで課題が解消されている。
+
+しかし`Amazon RDS プロキシ`はプレビュー版のため商用利用は控えた方がいいかも
+
+
+
+[RDS Proxyを使ってAWS LambdaからRDBにコネクションプールで接続する | Developers.IO](https://dev.classmethod.jp/articles/using-relational-databases-with-aws-lambda-easy-connection-pooling/)
+
+上記サイトに公式デモ動画へのリンクがある。
 
 
 
@@ -81,4 +99,6 @@ EC2で過去発生した特定リージョンの障害にもLambdaには影響�
     - API Gateway <--> Lambda <--> Amazon Translateによる翻訳サービス実装
   - https://speakerdeck.com/ketancho/jaws-ug-bgnr-24-serverless-quick-start-hands-on
     - ↑スライドへの直リンク
+- [なぜAWS LambdaとRDBMSの相性が悪いかを簡単に説明する - Sweet Escape](https://www.keisuke69.net/entry/2017/06/21/121501)
+- [RDS Proxyを使ってAWS LambdaからRDBにコネクションプールで接続する | Developers.IO](https://dev.classmethod.jp/articles/using-relational-databases-with-aws-lambda-easy-connection-pooling/)
 
